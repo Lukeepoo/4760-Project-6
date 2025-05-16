@@ -78,3 +78,7 @@ Notes:
 - All output from oss goes to logfile.txt and stdout
 - user_proc does not output to the log
 - Clock advances continuously; disk I/O is simulated with a 14ms delay
+
+Version Controll:
+------------------
+- Github: https://github.com/Lukeepoo/4760-Project-6
