@@ -7,4 +7,4 @@ user_proc: user_proc.c
 	gcc -Wall -g -o user_proc user_proc.c -lrt
 
 clean:
-	rm -f *.o oss user_proc
+	rm -f *.o oss user_proc *.txt logfile
