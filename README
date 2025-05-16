@@ -1,0 +1,80 @@
+CS 4760 – Assignment 6: Memory Management and LRU Page Replacement
+Author: Lucas Lovellette
+
+---
+
+Overview:
+----------
+This project simulates memory management in an operating system using page tables and the Least Recently Used (LRU) page replacement algorithm. It replaces the resource management and deadlock handling from Assignment 5 with paging logic.
+
+Each simulated user process randomly generates memory access requests. The master process (oss) handles these requests, tracks page faults, and manages frame allocation using LRU.
+
+---
+
+How to Build:
+-------------
+Run the following command:
+    make
+
+This will compile two executables:
+    oss         – the master process
+    user_proc   – the user process that requests memory access
+
+---
+
+How to Run:
+-----------
+Basic usage:
+    ./oss
+
+Optional arguments (not all are implemented):
+    -h                  Display help message
+    -n x                Total number of processes to launch (max 100)
+    -s x                Max simultaneous processes (max 18)
+    -i ms               Interval between launches (in ms)
+    -f filename         Log file to write output (default: logfile.txt)
+
+Example:
+    ./oss -n 50 -s 5 -f logfile.txt
+
+---
+
+What It Does:
+-------------
+- Spawns up to 18 user processes at once (out of a total of up to 100)
+- Each user sends memory requests (reads/writes) to oss
+- oss checks if the requested page is already in memory
+  - If yes: responds with success and updates LRU
+  - If no: handles page fault, possibly evicts a page using LRU
+- Every 1 simulated second, the memory layout and page tables are printed to the log
+- When a process terminates, its memory is released
+- Final statistics (memory accesses, page faults) are printed at the end
+
+---
+
+Files:
+------
+oss.c               – Master process logic
+user_proc.c         – Simulated user memory requestor
+clock.c/.h          – Shared simulated clock
+frame.c/.h          – Frame table and LRU logic
+memory.c/.h         – Memory access handling, page faults
+process_table.c/.h  – Process control and page tables
+message.h           – Message format for IPC
+Makefile            – Builds oss and user_proc
+logfile.txt         – Output log from oss (if specified)
+
+---
+
+Cleanup:
+--------
+To remove binaries and object files:
+    make clean
+
+---
+
+Notes:
+------
+- All output from oss goes to logfile.txt and stdout
+- user_proc does not output to the log
+- Clock advances continuously; disk I/O is simulated with a 14ms delay

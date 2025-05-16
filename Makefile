@@ -1,17 +1,10 @@
-CC = gcc
-CFLAGS = -Wall -g
-TARGETS = oss user
+all: oss user_proc
 
-all: $(TARGETS)
+oss: oss.c clock.c frame.c memory.c process_table.c
+	gcc -Wall -g -o oss oss.c clock.c frame.c memory.c process_table.c -lrt
 
-oss: oss.o
-	$(CC) $(CFLAGS) -o oss oss.o
-
-user: user.o
-	$(CC) $(CFLAGS) -o user user.o
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $<
+user_proc: user_proc.c
+	gcc -Wall -g -o user_proc user_proc.c -lrt
 
 clean:
-	rm -f $(TARGETS) *.o
+	rm -f *.o oss user_proc
