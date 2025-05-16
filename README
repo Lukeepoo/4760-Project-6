@@ -79,6 +79,6 @@ Notes:
 - user_proc does not output to the log
 - Clock advances continuously; disk I/O is simulated with a 14ms delay
 
-Version Controll:
+Version Control:
 ------------------
 - Github: https://github.com/Lukeepoo/4760-Project-6
